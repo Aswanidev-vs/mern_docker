@@ -1,0 +1,40 @@
+services:
+  backend:
+    build: ./server
+    container_name: mern-backend
+    ports:
+      - "5000:5000"
+    environment:
+      - NODE_ENV=production
+      - MONGO_URI=mongodb://mongo:27017/mern
+    depends_on:
+      - mongo
+    networks:
+      - mern-network
+
+  frontend:
+    build: ./client
+    container_name: mern-frontend
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+    networks:
+      - mern-network
+
+  mongo:
+    image: mongo:latest
+    container_name: mern-mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+    networks:
+      - mern-network
+
+volumes:
+  mongo-data:
+
+networks:
+  mern-network:
+    driver: bridge

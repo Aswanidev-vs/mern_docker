@@ -2,7 +2,7 @@
 //const { MongoClient } = require('mongodb');
 //const client = new MongoClient('mongodb://mongo:27017/cinema');
 
-//const connectionString = 'mongodb://mongo:27017/cinema';
+//const connectionString = process.env.MONGO_URI || 'mongodb://mongo:27017/mern';
 
 //mongoose.connect(client, { useNewUrlParser: true }).catch((e) => {
 //  console.error('Connection error', e.message);
@@ -14,7 +14,7 @@
 const mongoose = require('mongoose');
 
 // Define the MongoDB connection string
-const connectionString = 'mongodb://mongo:27017/cinema';
+const connectionString = process.env.MONGO_URI || 'mongodb://mongo:27017/mern';
 
 // Connect to MongoDB using Mongoose
 mongoose.connect(connectionString, { 
